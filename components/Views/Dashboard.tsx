@@ -48,9 +48,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ state, todayDate, onToggle
   const dateDisplay = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
 
   return (
-    <div className="animate-fade-in space-y-8">
+    <div className="space-y-8">
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 animate-fade-in">
         <div>
             <h1 className="text-3xl md:text-4xl font-light tracking-tighter text-white mb-1">Dashboard</h1>
             <div className="flex items-center gap-2 text-secondary">
@@ -62,17 +62,17 @@ export const Dashboard: React.FC<DashboardProps> = ({ state, todayDate, onToggle
         {/* Quick Greeting/Status */}
         <div className="text-sm font-mono text-tertiary text-right hidden md:block">
            SYSTEM ONLINE <br/>
-           V.2.4
+           V.2.5
         </div>
       </div>
 
       {/* Widgets Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-fade-in" style={{ animationDelay: '50ms' }}>
         <ProgressBar completed={completedCount} total={totalCount} />
         
         {/* Focus Card */}
-        <div className="bg-surface border border-white/10 rounded-xl p-5 flex flex-col justify-between relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-4 opacity-10">
+        <div className="bg-surface border border-white/10 rounded-xl p-5 flex flex-col justify-between relative overflow-hidden group hover:border-white/20 transition-colors">
+            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                 <Zap className="w-24 h-24 text-white" />
             </div>
             
@@ -106,7 +106,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ state, todayDate, onToggle
       </div>
 
       {/* AI Command Bar */}
-      <div className="relative group">
+      <div className="relative group animate-fade-in" style={{ animationDelay: '100ms' }}>
         <div className="absolute -inset-0.5 bg-gradient-to-r from-white/20 to-white/0 rounded-lg blur opacity-30 group-hover:opacity-50 transition duration-1000"></div>
         <form onSubmit={handleSmartSubmit} className="relative bg-black border border-white/10 rounded-lg flex items-center shadow-xl">
             <div className="pl-4 text-white">
@@ -138,23 +138,24 @@ export const Dashboard: React.FC<DashboardProps> = ({ state, todayDate, onToggle
 
       {/* Protocol List */}
       <div className="space-y-4">
-        <div className="flex items-center justify-between px-1">
+        <div className="flex items-center justify-between px-1 animate-fade-in" style={{ animationDelay: '150ms' }}>
             <h3 className="text-xs font-bold text-secondary uppercase tracking-widest">Daily Protocol</h3>
             <span className="text-[10px] font-mono text-tertiary">{completedCount} / {totalCount} OPS</span>
         </div>
         
         <div className="space-y-2">
-            {sortedItems.map(item => (
-                <ItemCard 
-                key={item.id} 
-                item={item} 
-                isCompleted={todayLog.completedItemIds.includes(item.id)}
-                onToggle={(id) => onToggle(id)}
-                />
+            {sortedItems.map((item, index) => (
+                <div key={item.id} className="animate-fade-in-up" style={{ animationDelay: `${150 + (index * 50)}ms` }}>
+                    <ItemCard 
+                    item={item} 
+                    isCompleted={todayLog.completedItemIds.includes(item.id)}
+                    onToggle={(id) => onToggle(id)}
+                    />
+                </div>
             ))}
             
             {sortedItems.length === 0 && (
-                <div className="border border-dashed border-white/10 rounded-lg p-8 text-center">
+                <div className="border border-dashed border-white/10 rounded-lg p-8 text-center animate-fade-in">
                     <p className="text-sm text-tertiary">Registry is empty.</p>
                     <p className="text-xs text-zinc-600 mt-1">Initialize via Manage view.</p>
                 </div>

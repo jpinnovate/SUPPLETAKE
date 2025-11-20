@@ -23,7 +23,7 @@ export const Insights: React.FC<InsightsProps> = ({ state, todayDate }) => {
     const dateStr = d.toISOString().split('T')[0];
     const log = state.logs[dateStr];
     return {
-      name: d.toLocaleDateString('en-US', { weekday: 'short' }),
+      name: d.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase(),
       completed: log ? log.completedItemIds.length : 0,
     };
   });
@@ -86,7 +86,7 @@ export const Insights: React.FC<InsightsProps> = ({ state, todayDate }) => {
                         tickLine={false} 
                         axisLine={false} 
                         dy={15}
-                        tick={{ fontFamily: 'DM Sans', textTransform: 'uppercase' }}
+                        tick={{ fontFamily: 'DM Sans' }}
                     />
                     <YAxis hide domain={[0, state.items.length + 1]} />
                     <Tooltip 

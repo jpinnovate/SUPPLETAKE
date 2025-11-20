@@ -104,11 +104,18 @@ export default function App() {
 
       <style>{`
         @keyframes fade-in {
-            from { opacity: 0; transform: scale(0.95); }
+            from { opacity: 0; transform: scale(0.98); }
             to { opacity: 1; transform: scale(1); }
         }
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         .animate-fade-in {
-            animation: fade-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: fade-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .animate-fade-in-up {
+            animation: fade-in-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
         }
       `}</style>
     </div>
